@@ -45,8 +45,9 @@ const NavBar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <NavLink to="/dashboard" className="flex items-center space-x-2">
+          <img src="/logo.png" alt="MoraEduAssist Logo" className="h-8 w-auto" />
           <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700">
-            EduAssist
+            MoraEduAssist
           </span>
         </NavLink>
 

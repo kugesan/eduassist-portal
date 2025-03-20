@@ -1,9 +1,10 @@
 
-import React from 'react';
-import { Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ExplainButton from './ExplainButton';
+import PdfSubmission from './PdfSubmission';
 import { Assignment } from '@/services/moodleApi';
 import { format, isPast, isToday, isTomorrow } from 'date-fns';
 
@@ -12,6 +13,7 @@ interface AssignmentCardProps {
 }
 
 const AssignmentCard: React.FC<AssignmentCardProps> = ({ assignment }) => {
+  const [showSubmission, setShowSubmission] = useState(false);
   const dueDate = new Date(assignment.dueDate);
   const isPastDue = isPast(dueDate) && !isToday(dueDate);
   
@@ -63,11 +65,37 @@ const AssignmentCard: React.FC<AssignmentCardProps> = ({ assignment }) => {
           {assignment.description}
         </p>
       </CardContent>
-      <CardFooter className="pt-0 flex justify-end">
-        <ExplainButton 
-          assignmentTitle={assignment.title} 
-          assignmentDescription={assignment.description} 
-        />
+      <CardFooter className="pt-0 flex flex-col w-full">
+        <div className="flex justify-between w-full mb-2">
+          <ExplainButton 
+            assignmentTitle={assignment.title} 
+            assignmentDescription={assignment.description} 
+          />
+          
+          <button 
+            onClick={() => setShowSubmission(!showSubmission)}
+            className="flex items-center text-sm text-primary hover:underline"
+          >
+            {showSubmission ? (
+              <>
+                Hide Submission <ChevronUp size={14} className="ml-1" />
+              </>
+            ) : (
+              <>
+                Submit PDF <ChevronDown size={14} className="ml-1" />
+              </>
+            )}
+          </button>
+        </div>
+        
+        {showSubmission && (
+          <div className="w-full mt-2">
+            <PdfSubmission 
+              assignmentId={assignment.id} 
+              assignmentTitle={assignment.title} 
+            />
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

@@ -28,9 +28,12 @@ const Index = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-blue-50 p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700 mb-2">
-            EduAssist
-          </h1>
+          <div className="flex flex-col items-center justify-center">
+            <img src="/logo.png" alt="MoraEduAssist Logo" className="h-20 w-auto mb-4" />
+            <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-700 mb-2">
+              MoraEduAssist
+            </h1>
+          </div>
           <p className="text-gray-600">Your AI-powered learning companion</p>
         </div>
         
